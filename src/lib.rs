@@ -5,7 +5,7 @@ use rand::Rng;
 
 #[derive(Debug)]
 pub struct Mansion {
-    rooms: Vec<String>,
+    pub rooms: Vec<String>,
 }
 
 #[derive(Debug)]
@@ -26,23 +26,30 @@ impl Suspect {
 
 #[derive(Debug)]
 pub struct MurderWeapon {
-    weapons: Vec<String>,
+    pub weapons: Vec<String>,
 }
 
+#[derive(Debug)]
 pub struct Guilty {
-    person: Suspect,
+    person: String,
     place: String,
     method: String,
 }
 
 impl Guilty {
-    pub fn create_guilty(person: Vec<Suspect>, place: Vec<String>, method: Vec<String>) -> Guilty {
+    pub fn create_guilty(perp: Vec<Suspect>, place: Vec<String>, method: Vec<String>) -> Guilty {
 
         let get_suspect: usize = rand::thread_rng().gen_range(0, 10);
         let get_room: usize = rand::thread_rng().gen_range(0, 10);
         let get_weapon: usize = rand::thread_rng().gen_range(0, 8);
 
-        Guilty {person: person[get_suspect], place: place[get_room], method: method[get_weapon]}
+        let fname = perp[get_suspect].fname.to_string();
+        let lname = perp[get_suspect].lname.to_string();
+
+        let name: String = fname + " " + &lname;
+
+
+        Guilty {person: name, place: place[get_room].to_string(), method: method[get_weapon].to_string()}
     }
 }
 
@@ -160,5 +167,9 @@ pub fn show_suspects(everyone: Vec<Suspect>) {
 
 pub fn show_mansion(mansion: Mansion) {
     println!("{:?}", mansion);
+}
+
+pub fn show_guilty(perp: Guilty) {
+    println!("{:?}", perp);
 }
 
