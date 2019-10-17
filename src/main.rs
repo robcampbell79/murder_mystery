@@ -7,6 +7,7 @@ use murder_mystery::show_mansion;
 use murder_mystery::MurderWeapon;
 use murder_mystery::weapons_list;
 use murder_mystery::Guilty;
+use murder_mystery::show_guilty;
 
 fn main() {
 
@@ -16,15 +17,15 @@ fn main() {
 
     let s = create_suspects();
 
-    show_suspects(s);
+    show_suspects(&s);
 
     let m = create_mansion();
 
-    show_mansion(m);
+    show_mansion(&m);
 
     let w = weapons_list();
 
     let guilty = Guilty::create_guilty(s, m.rooms, w.weapons);
 
-    
+    show_guilty(&guilty);
 }

@@ -157,19 +157,19 @@ pub fn weapons_list() -> MurderWeapon {
         MurderWeapon {weapons: weapons}
 }
 
-pub fn show_weapons(weapon: MurderWeapon) {
+pub fn show_weapons(weapon: &MurderWeapon) {
     println!("{:?}", weapon);
 }
 
-pub fn show_suspects(everyone: Vec<Suspect>) {
+pub fn show_suspects(everyone: &Vec<Suspect>) {
     println!("{:?}", everyone);
 }
 
-pub fn show_mansion(mansion: Mansion) {
+pub fn show_mansion(mansion: &Mansion) {
     println!("{:?}", mansion);
 }
 
-pub fn show_guilty(perp: Guilty) {
+pub fn show_guilty(perp: &Guilty) {
     println!("{:?}", perp);
 }
 
