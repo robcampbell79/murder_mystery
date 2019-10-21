@@ -12,10 +12,6 @@ use murder_mystery::roll_dice;
 
 fn main() {
 
-    let suspect: Suspect;
-    let mansion: Mansion;
-    let weapon: MurderWeapon;
-
     let s = create_suspects();
 
     show_suspects(&s);
