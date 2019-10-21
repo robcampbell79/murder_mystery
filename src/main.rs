@@ -8,6 +8,7 @@ use murder_mystery::MurderWeapon;
 use murder_mystery::weapons_list;
 use murder_mystery::Guilty;
 use murder_mystery::show_guilty;
+use murder_mystery::roll_dice;
 
 fn main() {
 
@@ -28,4 +29,6 @@ fn main() {
     let guilty = Guilty::create_guilty(s, m.rooms, w.weapons);
 
     show_guilty(&guilty);
+
+    roll_dice();
 }
