@@ -18,7 +18,7 @@ pub struct Suspect {
 
 impl Suspect {
     pub fn new(fname: String, lname: String, occupation: String) -> Suspect {
-        let resist = rand::thread_rng().gen_range(1, 11);
+        let resist = rand::thread_rng().gen_range(1, 10);
 
         Suspect {fname: fname, lname: lname, occupation: occupation, resistance: resist}
     }
@@ -39,7 +39,7 @@ pub struct Guilty {
 impl Guilty {
     pub fn create_guilty(perp: Vec<Suspect>, place: Vec<String>, method: Vec<String>) -> Guilty {
 
-        let get_suspect: usize = rand::thread_rng().gen_range(0, 10);
+        let get_suspect: usize = rand::thread_rng().gen_range(0, 6);
         let get_room: usize = rand::thread_rng().gen_range(0, 10);
         let get_weapon: usize = rand::thread_rng().gen_range(0, 8);
 
@@ -143,18 +143,28 @@ pub fn create_suspects() -> Vec<Suspect> {
 
 pub fn weapons_list() -> MurderWeapon {
 
-        let mut weapons = Vec::new();
+    let mut weapons = Vec::new();
 
-        weapons.push(String::from("Revolver"));
-        weapons.push(String::from("Rifle"));
-        weapons.push(String::from("Knife"));
-        weapons.push(String::from("Sword"));
-        weapons.push(String::from("Poker"));
-        weapons.push(String::from("Statue"));
-        weapons.push(String::from("Rope"));
-        weapons.push(String::from("pipe"));
+    weapons.push(String::from("Revolver"));
+    weapons.push(String::from("Rifle"));
+    weapons.push(String::from("Knife"));
+    weapons.push(String::from("Sword"));
+    weapons.push(String::from("Poker"));
+    weapons.push(String::from("Statue"));
+    weapons.push(String::from("Rope"));
+    weapons.push(String::from("pipe"));
 
-        MurderWeapon {weapons: weapons}
+    MurderWeapon {weapons: weapons}
+}
+
+pub fn roll_dice() -> i32 {
+    let die1 = rand::thread_rng().gen_range(1, 7);
+    let die2 = rand::thread_rng().gen_range(1, 7);
+    let total: i32 = die1 + die2;
+
+    println!("{} {}", die1, die2);
+
+    total
 }
 
 pub fn show_weapons(weapon: &MurderWeapon) {
