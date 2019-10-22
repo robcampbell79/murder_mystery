@@ -37,7 +37,7 @@ pub struct Guilty {
 }
 
 impl Guilty {
-    pub fn create_guilty(perp: Vec<Suspect>, place: Vec<String>, method: Vec<String>) -> Guilty {
+    pub fn create_guilty(perp: &Vec<Suspect>, place: Vec<String>, method: Vec<String>) -> Guilty {
 
         let get_suspect: usize = rand::thread_rng().gen_range(0, 6);
         let get_room: usize = rand::thread_rng().gen_range(0, 10);
@@ -121,11 +121,57 @@ pub fn create_suspects() -> Vec<Suspect> {
 
     let mut get_occup:usize;
 
+    let mut temp_fname: Vec<usize> = Vec::new();
+    let mut temp_lname: Vec<usize> = Vec::new();
+    let mut temp_occup: Vec<usize> = Vec::new();
+    let mut tfn: usize = 13;
+    let mut tln: usize = 13;
+    let mut toc: usize = 13;
+
     loop {
         if count <= 5 {
-            get_fname = rand::thread_rng().gen_range(0, 10);
-            get_lname = rand::thread_rng().gen_range(0, 10);
-            get_occup = rand::thread_rng().gen_range(0, 10);
+            loop {
+                get_fname = rand::thread_rng().gen_range(0, 10);
+                let i:usize = 0;
+                for i in 0..temp_fname.len() {
+                    if get_fname == temp_fname[i] {
+                        tfn = temp_fname[i].clone();
+                    } 
+                }
+                if get_fname != tfn {
+                    break;
+                }
+            }
+
+            loop {
+                get_lname = rand::thread_rng().gen_range(0, 10);
+                let j:usize = 0;
+                for j in 0..temp_lname.len() {
+                    if get_lname == temp_lname[j] {
+                        tln = temp_lname[j].clone();
+                    } 
+                }
+                if get_lname != tln {
+                    break;
+                }
+            }
+
+            loop {
+                get_occup = rand::thread_rng().gen_range(0, 10);
+                let x:usize = 0;
+                for x in 0..temp_occup.len() {
+                    if get_occup == temp_occup[x] {
+                        toc = temp_occup[x].clone();
+                    } 
+                }
+                if get_occup != toc {
+                    break;
+                }
+            }
+
+            temp_fname.push(get_fname.clone());
+            temp_lname.push(get_lname.clone());
+            temp_occup.push(get_occup.clone());
 
             person = Suspect::new(fnames[get_fname].to_string(), lnames[get_lname].to_string(), occups[get_occup].to_string());
 
@@ -172,7 +218,11 @@ pub fn show_weapons(weapon: &MurderWeapon) {
 }
 
 pub fn show_suspects(everyone: &Vec<Suspect>) {
-    println!("{:?}", everyone);
+    let i:usize = 0;
+    for i in 0..everyone.len() {
+        println!("{:?}", everyone[i]);
+    }
+    //println!("{:?}", everyone);
 }
 
 pub fn show_mansion(mansion: &Mansion) {

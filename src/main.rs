@@ -14,17 +14,21 @@ fn main() {
 
     let s = create_suspects();
 
-    show_suspects(&s);
+    //show_suspects(&s);
 
     let m = create_mansion();
 
-    show_mansion(&m);
+    //show_mansion(&m);
 
     let w = weapons_list();
 
-    let guilty = Guilty::create_guilty(s, m.rooms, w.weapons);
+    let guilty = Guilty::create_guilty(&s, m.rooms, w.weapons);
 
     show_guilty(&guilty);
 
-    roll_dice();
+    //roll_dice();
+
+    println!("Welcome to Owl Haven mansion, Detective. The suspects are inside. Mr. D'Ceased was found in the Grand Foyer, but it is believed that he was moved from the original crime scene.");
+    println!("The suspects:");
+    show_suspects(&s);
 }
