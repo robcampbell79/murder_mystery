@@ -14,8 +14,6 @@ fn main() {
 
     let s = create_suspects();
 
-    //show_suspects(&s);
-
     let m = create_mansion();
 
     //show_mansion(&m);
@@ -31,4 +29,8 @@ fn main() {
     println!("Welcome to Owl Haven mansion, Detective. The suspects are inside. Mr. D'Ceased was found in the Grand Foyer, but it is believed that he was moved from the original crime scene.");
     println!("The suspects:");
     show_suspects(&s);
+
+    // loop {
+
+    // }
 }

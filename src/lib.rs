@@ -40,7 +40,7 @@ impl Guilty {
     pub fn create_guilty(perp: &Vec<Suspect>, place: Vec<String>, method: Vec<String>) -> Guilty {
 
         let get_suspect: usize = rand::thread_rng().gen_range(0, 6);
-        let get_room: usize = rand::thread_rng().gen_range(0, 10);
+        let get_room: usize = rand::thread_rng().gen_range(0, 12);
         let get_weapon: usize = rand::thread_rng().gen_range(0, 8);
 
         let fname = perp[get_suspect].fname.to_string();
@@ -64,7 +64,9 @@ pub fn create_mansion() -> Mansion {
         rooms.push(String::from("Library"));
         rooms.push(String::from("Ballroom"));
         rooms.push(String::from("Study"));
+        rooms.push(String::from("Bathroom"));
         rooms.push(String::from("Drawing Room"));
+        rooms.push(String::from("Garage"));
         rooms.push(String::from("Garden"));
         rooms.push(String::from("Shooting Range"));
 
