@@ -11,6 +11,7 @@ use murder_mystery::show_guilty;
 use murder_mystery::roll_dice;
 use murder_mystery::create_witness;
 use murder_mystery::show_card;
+use murder_mystery::check_win;
 use std::process::Command;
 use std::io;
 
@@ -228,7 +229,65 @@ fn main() {
                     }
                 }
                 else if choice.trim() == "4" {
-                    println!("You win!");
+                    let answer = Vec::new();
+
+                    println!("Who?");
+
+                    show_suspects(&s);
+
+                    let mut who = String::new();
+
+                    io::stdin().read_line(&mut who).expect("Invalid input.");
+
+                    let who: usize = match who.trim().parse() {
+                        Ok(num) => num,
+                        Err(_) => continue,
+                    };
+
+                    let fName = s[who].fname.to_string();
+                    let lName = s[who].lname.to_string();
+
+                    let name: String = fName + " " + &lName;
+
+                    println!("Where?");
+
+                    show_mansion(&m.rooms);
+
+                    let mut location = String::new();
+
+                    io::stdin().read_line(&mut location).expect("Invalid input.");
+
+                    let location: usize = match location.trim().parse() {
+                        Ok(num) => num,
+                        Err(_) => continue,
+                    };
+
+                    let place = &m.rooms[location];
+
+                    println!("How?");
+
+                    show_weapons(&w);
+
+                    let mut how = String::new();
+
+                    io::stdin().read_line(&mut how).expect("Invalid input.");
+
+                    let how: usize = match how.trim().parse() {
+                        Ok(num) => num,
+                        Err(_) => continue,
+                    };
+
+                    let item = &w.weapons[how];
+
+                    answer.push(item);
+                    answer.push(place);
+                    answer.push(&name);
+
+                    if check_win(&answer, guilty) == true {
+                        println!("You win!");
+                        break;
+                    }
+
                 }
                 else if choice.trim() == "5" {
                     dice = 0;

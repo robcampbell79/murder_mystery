@@ -293,3 +293,14 @@ pub fn show_card(suspects: &Vec<Suspect>, weapon: &Vec<String>, mansion: &Vec<St
     println!("-----------------------------------------------------------------------------------------");
 }
 
+pub fn check_win(answer: Vec<String>, guilty: Guilty) -> bool {
+    let mut winner = false;
+
+    // if assert_eq!(answer[0], guilty[0]) && assert_eq!(answer[1], guilty[1]) && assert_eq!(answer[2], guilty[2]) {
+    if answer[0] == guilty.person && answer[1] == guilty.place && answer[2] == guilty.method {
+        winner = true;
+    }
+
+    winner
+}
+
