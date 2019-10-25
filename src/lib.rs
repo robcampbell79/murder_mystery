@@ -31,13 +31,13 @@ pub struct MurderWeapon {
 
 #[derive(Debug)]
 pub struct Guilty {
-    person: String,
-    place: String,
-    method: String,
+    pub person: String,
+    pub place: String,
+    pub method: String,
 }
 
 impl Guilty {
-    pub fn create_guilty(perp: &Vec<Suspect>, place: Vec<String>, method: &Vec<String>) -> Guilty {
+    pub fn create_guilty(perp: &Vec<Suspect>, place: &Vec<String>, method: &Vec<String>) -> Guilty {
 
         let get_suspect: usize = rand::thread_rng().gen_range(0, 6);
         let get_room: usize = rand::thread_rng().gen_range(0, 12);
@@ -189,6 +189,32 @@ pub fn create_suspects() -> Vec<Suspect> {
     suspects
 }
 
+pub fn create_witness(everyone: &Vec<Suspect>, guilty: &Guilty) -> String {
+
+    let mut notDup: bool = false;
+
+    let mut witness: String = "".to_string();
+
+    let mut know: usize;
+
+    while notDup == false {
+        know = rand::thread_rng().gen_range(0, 6);
+
+        let fname = everyone[know].fname.to_string();
+        let lname = everyone[know].lname.to_string();
+
+        witness = fname.clone();
+
+        let name: String = fname + " " + &lname;
+
+        if name != guilty.person {
+            notDup = true;
+        }
+    }
+
+    witness
+}
+
 pub fn weapons_list() -> MurderWeapon {
 
     let mut weapons = Vec::new();
@@ -210,7 +236,7 @@ pub fn roll_dice() -> i32 {
     let die2 = rand::thread_rng().gen_range(1, 7);
     let total: i32 = die1 + die2;
 
-    println!("{} {}", die1, die2);
+    println!("roll: {} {}", die1, die2);
 
     total
 }
@@ -227,20 +253,24 @@ pub fn show_weapons(weapon: &Vec<String>) {
 pub fn show_suspects(everyone: &Vec<Suspect>) {
     let i:usize = 0;
     for i in 0..everyone.len() {
-        println!("{:?}", everyone[i]);
+        println!("{}) {:?}", i, everyone[i]);
     }
     //println!("{:?}", everyone);
 }
 
-pub fn show_mansion(mansion: &Mansion) {
-    println!("{:?}", mansion);
+pub fn show_mansion(mansion: &Vec<String>) {
+    let i:usize = 0;
+    for i in 0..mansion.len() {
+        println!("{}) {:?}", i, mansion[i]);
+    }
+    //println!("{:?}", mansion);
 }
 
 pub fn show_guilty(perp: &Guilty) {
     println!("{:?}", perp);
 }
 
-pub fn show_card(suspects: &Vec<Suspect>, weapon: &Vec<String>) {
+pub fn show_card(suspects: &Vec<Suspect>, weapon: &Vec<String>, mansion: &Vec<String>) {
     println!("Card");
     println!("-----------------------------------------------------------------------------------------");
     println!("The suspects:");
@@ -253,6 +283,12 @@ pub fn show_card(suspects: &Vec<Suspect>, weapon: &Vec<String>) {
     let w:usize = 0;
     for w in 0..weapon.len() {
         println!("{:?}", weapon[w]);
+    }
+    println!("-----------------------------------------------------------------------------------------");
+    println!("The rooms:");
+    let m:usize = 0;
+    for m in 0..mansion.len() {
+        println!("{:?}", mansion[m]);
     }
     println!("-----------------------------------------------------------------------------------------");
 }
