@@ -257,7 +257,7 @@ pub fn roll_dice() -> i32 {
 pub fn show_weapons(weapon: &Vec<String>) {
     let i:usize = 0;
     for i in 0..weapon.len() {
-        println!("{:?}", weapon[i]);
+        println!("{}) {:?}", i, weapon[i]);
     }
     //println!("{:?}", weapon);
 }
