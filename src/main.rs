@@ -60,14 +60,14 @@ fn main() {
 
         let wtn = create_witness(&s, &guilty);
 
-        show_guilty(&guilty);
+        //show_guilty(&guilty);
 
         room = &m.rooms[0];
 
         println!("Welcome to Owl Haven manor, Detective. The suspects are inside. Mr. D'Ceased was found in the Grand Foyer, but it is believed that he was moved from the original crime scene. The suspects are inside.");
         println!("");
 
-        loop {
+        'game: loop {
             //show_card(&s, &w.weapons);
 
             println!("Type roll and press enter to roll the dice that begins your turn.");
@@ -98,7 +98,7 @@ fn main() {
                 io::stdin().read_line(&mut choice).expect("Invalid input.");
 
                 if choice.trim() == "1" {
-                    println!("You are in {}", room);
+                    println!("You are in the {}", room);
                     println!("What room would you like to move to?");
                     show_mansion(&m.rooms);
 
@@ -136,7 +136,6 @@ fn main() {
                     //println!("index {} / dice {}", index, dice);
                 }
                 else if choice.trim() == "2" {
-                    println!("Crime scene {}", guilty.place);
                     if dice >= 2 {
                         dice = dice - 2;
 
@@ -212,7 +211,7 @@ fn main() {
 
                             if &ask > resistance {
                                 if &s[personToQuestion].fname == &wtn {
-                                    println!("Detective, I saw {} sneaking off.", guilty.person);
+                                    println!("Detective, I saw {} sneaking off to the {}.", guilty.person, guilty.place);
                                 } else {
                                     println!("I didn't see anything, Detective");
                                 }
@@ -284,7 +283,10 @@ fn main() {
 
                     if check_win(answer, &guilty) == true {
                         println!("You win!");
-                        break;
+                        break 'game;
+                    } else {
+                        println!("You were wrong and {} killed you.", guilty.person);
+                        break 'game;
                     }
 
                 }
@@ -298,8 +300,8 @@ fn main() {
                 turns = turns - 1;
 
                 if turns == 0 {
-                    println!("You were murdered, you lose!");
-                    break;
+                    println!("{} has murdered you, you lose!", guilty.place);
+                    break 'game;
                 }
             }
 
