@@ -53,6 +53,18 @@ impl Guilty {
     }
 }
 
+pub struct Answer {
+    pub person: String,
+    pub place: String,
+    pub method: String,
+}
+
+impl Answer {
+    pub fn create_answer(person: String, place: String, method: String) -> Answer {
+        Answer {person: person, place: place.to_owned(), method: method.to_owned()}
+    }
+}
+
 pub fn create_mansion() -> Mansion {
 
         let mut rooms = Vec::new();
@@ -293,11 +305,11 @@ pub fn show_card(suspects: &Vec<Suspect>, weapon: &Vec<String>, mansion: &Vec<St
     println!("-----------------------------------------------------------------------------------------");
 }
 
-pub fn check_win(answer: Vec<String>, guilty: Guilty) -> bool {
+pub fn check_win(answer: Answer, guilty: &Guilty) -> bool {
     let mut winner = false;
 
     // if assert_eq!(answer[0], guilty[0]) && assert_eq!(answer[1], guilty[1]) && assert_eq!(answer[2], guilty[2]) {
-    if answer[0] == guilty.person && answer[1] == guilty.place && answer[2] == guilty.method {
+    if answer.person == guilty.person && answer.place == guilty.place && answer.method == guilty.method {
         winner = true;
     }
 

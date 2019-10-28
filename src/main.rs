@@ -4,10 +4,12 @@ use murder_mystery::show_suspects;
 use murder_mystery::Mansion;
 use murder_mystery::create_mansion;
 use murder_mystery::show_mansion;
+use murder_mystery::show_weapons;
 use murder_mystery::MurderWeapon;
 use murder_mystery::weapons_list;
 use murder_mystery::Guilty;
 use murder_mystery::show_guilty;
+use murder_mystery::Answer;
 use murder_mystery::roll_dice;
 use murder_mystery::create_witness;
 use murder_mystery::show_card;
@@ -229,7 +231,6 @@ fn main() {
                     }
                 }
                 else if choice.trim() == "4" {
-                    let answer = Vec::new();
 
                     println!("Who?");
 
@@ -266,7 +267,7 @@ fn main() {
 
                     println!("How?");
 
-                    show_weapons(&w);
+                    show_weapons(&w.weapons);
 
                     let mut how = String::new();
 
@@ -279,11 +280,9 @@ fn main() {
 
                     let item = &w.weapons[how];
 
-                    answer.push(item);
-                    answer.push(place);
-                    answer.push(&name);
+                    let answer = Answer::create_answer(name, place.to_string(), item.to_string());
 
-                    if check_win(&answer, guilty) == true {
+                    if check_win(answer, &guilty) == true {
                         println!("You win!");
                         break;
                     }
